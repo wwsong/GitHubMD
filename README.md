@@ -319,6 +319,71 @@ Response: [billpay](billpay.json)
     </tr>
 </table> 
 
+#### repay
+A processing resource that fulfills a repayment schedule by calling PayPal Money system to generate the transaction as instructed in the payment request. This step is part of the overal Credit Repayment processing process as known as the Money Movement step performed by PayPal subsystem.  
+```
+ POST v1/credit/billpay/repay
+```  
+Request: [payment_request.json](payment_request.json)  
+Response: [payment_response.json](payment_response.json)  
+<table>
+    <tr>
+        <th>Response Code</th>
+        <th>Name</th>
+        <th>Reason</th>
+    </tr>
+    <tr>
+        <td>200 OK</td>
+        <td>OK</td>
+        <td>The billpay repay request has succeeded.</td>
+    </tr>
+    <tr>
+        <td>400 Bad Request</td>
+        <td>INVALID_PAYER_ID</td>
+        <td>Payer ID is invalid.</td>
+    </tr>
+    <tr>
+        <td>404 Not Found</td>
+        <td>FPACCOUNT_NOT_FOUND</td>
+        <td>The FinProd Account in the request is not found.</td>
+    </tr>
+    <tr>
+        <td>422 Unprocessable Entity </td>
+        <td>BILLPAY_NOT_FOUND</td>
+        <td>The billpay id in the request is not found.</td>
+    </tr>
+    <tr>
+        <td>422 Unprocessable Entity </td>
+        <td>BILLPAY_NOT_FOUND</td>
+        <td>The billpay id in the request is not found.</td>
+    </tr>
+    <tr>
+        <td>422 Unprocessable Entity</td>
+        <td>BILLPAY_NOT_FOUND</td>
+        <td>The billpay id in the request is not found.</td>
+    </tr>
+    <tr>
+        <td>403 Forbidden</td>
+        <td>FPACCOUNT_NOT_ACCESSIBLE</td>
+        <td>The actor in context does not have access to the FinProd Account.</td>
+    </tr>
+    <tr>
+        <td>500 Internal Server Error</td>
+        <td>UNKNOWN_SERVICE_ERROR</td>
+        <td>Unknown error during execution of 3rd party services.</td>
+    </tr>
+    <tr>
+        <td>500 Internal Server Error</td>
+        <td>SERVICE_COMM_ERROR</td>
+        <td>Failure communicating with downstream service.</td>
+    </tr>
+    <tr>
+        <td>500 Internal Server Error</td>
+        <td>INTERNAL_SERVICE_ERROR</td>
+        <td>Service encountered an unexpected condition which prevented it from fulfilling the request.</td>
+    </tr>
+</table> 
+
 ## [billpay_constraints](billpay_constraints.json)
 ### Description
 Represents current constraints on the Credit account for making or scheduling a bill payment.

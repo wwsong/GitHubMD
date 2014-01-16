@@ -9,6 +9,7 @@ The use cases supported by this API are:
 *  Create a new bill payment.  
 *  Update the schedule date, funding source information and payment amount of a bill payment that is not processed yet.  
 *  Cancel an unprocessed bill payment.  
+*  Processing a payment request generated from billpay. 
 *  Retrieve the current constraints that apply for scheduling or updating an existing bill payment.  
 *  Retrieve the current constraints that apply for configuring a user Credit account auto pay.  
 *  Retrieve user auto pay configuration.  
@@ -344,38 +345,38 @@ Response: [payment_response.json](payment_response.json)
     </tr>
     <tr>
         <td>404 Not Found</td>
-        <td>FPACCOUNT_NOT_FOUND</td>
-        <td>The FinProd Account in the request is not found.</td>
+        <td>PAYER_NOT_FOUND</td>
+        <td>Can not find the PayPal user account given the payer id.</td>
+    </tr>
+    <tr>
+        <td>404 Not Found</td>
+        <td>SCHEDULE_NOT_FOUND</td>
+        <td>Can not find the schedule in Finprod given the payment request id for legacy schedule.</td>
     </tr>
     <tr>
         <td>422 Unprocessable Entity </td>
-        <td>BILLPAY_NOT_FOUND</td>
-        <td>The billpay id in the request is not found.</td>
+        <td>INSUFFICIENT_PAYPAL_BALANCE</td>
+        <td>User's PayPal Balance is insufficient to cover the payment amount and there is no Band funding source to use as back up.</td>
     </tr>
     <tr>
         <td>422 Unprocessable Entity </td>
-        <td>BILLPAY_NOT_FOUND</td>
-        <td>The billpay id in the request is not found.</td>
+        <td>AUTHORIZATION_REJECT</td>
+        <td>The credit card or debit card authorization is rejected by the issuing bank.</td>
     </tr>
     <tr>
         <td>422 Unprocessable Entity</td>
-        <td>BILLPAY_NOT_FOUND</td>
-        <td>The billpay id in the request is not found.</td>
+        <td>FULFILLMENT_RISK_REJECT</td>
+        <td>PayPal transaction risk rejects the payment request.</td>
     </tr>
     <tr>
-        <td>403 Forbidden</td>
-        <td>FPACCOUNT_NOT_ACCESSIBLE</td>
-        <td>The actor in context does not have access to the FinProd Account.</td>
+        <td>524 Timeout Occurred</td>
+        <td>PLANNING_TIMEOUT</td>
+        <td>The Planning call timeout to response with a plan.</td>
     </tr>
     <tr>
-        <td>500 Internal Server Error</td>
-        <td>UNKNOWN_SERVICE_ERROR</td>
-        <td>Unknown error during execution of 3rd party services.</td>
-    </tr>
-    <tr>
-        <td>500 Internal Server Error</td>
-        <td>SERVICE_COMM_ERROR</td>
-        <td>Failure communicating with downstream service.</td>
+        <td>524 Timeout Occurred</td>
+        <td>FULFILLMENT_TIMEOUT</td>
+        <td>The Fulfillment call timeout to response with payment status.</td>
     </tr>
     <tr>
         <td>500 Internal Server Error</td>
